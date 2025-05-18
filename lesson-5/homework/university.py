@@ -14,16 +14,14 @@ def enrollment_stats(university):
 
     print("******************************")
     print(f"Total students: {sum_student}")
-    print(f"Total tuition: $ {sum_tution}")
-
-    arr_student.sort()  # Sort student list for median calculation
-    arr_tution.sort()   # Sort tuition list for median calculation
+    print(f"Total tution: $ {sum_tution} \n")
 
     # Print mean and median of datas
     print(f"Student mean: {mean(arr_student, num_univers)}")
-    print(f"Student median: {median(arr_student, num_univers)}")
+    print(f"Student median: {median(arr_student, num_univers)}\n")
+    
     print(f"Tuition mean: {mean(arr_tution, num_univers)}")
-    print(f"Tuition mean: {median(arr_tution, num_univers)}")
+    print(f"Tuition median: {median(arr_tution, num_univers)}")
     print("******************************")
 
 # Function to calculate the mean of a array
@@ -32,6 +30,7 @@ def mean(array, cnt):
 
 # Function to calculate the median of a array
 def median(array, cnt):
+    array.sort()  # Sort list for median calculation
     if cnt % 2 == 0:
         return round((array[cnt//2] + array[cnt//2 - 1]) / 2)
     else:

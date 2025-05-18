@@ -7,9 +7,9 @@ def convert_far_to_cel(far):    #function converts from Fahrenheit  to  Celsius
     return round(cel,2)
 
 #Asking user Fahrenheit
-far_cel = int(input("Enter a temperature in degrees F: "))
+far_cel = float(input("Enter a temperature in degrees F: "))
 print(f"{far_cel} degrees F {convert_far_to_cel(far_cel)} degrees C") 
 
 #Asking user Celsius
-cel_far = int(input("Enter a temperature in degrees C: "))
+cel_far = float(input("Enter a temperature in degrees C: "))
 print(f"{cel_far} degrees C = {convert_cel_to_far(cel_far)} degrees F")
