@@ -45,16 +45,58 @@ def search_info():
                 break
     if not found:
         print("Employee not found.\n")
+def update_record():
+    employee_id = input("Enter Employee ID to update: ")
+    updated = False
+    with open('employees.txt', 'r') as file:
+        lines = file.readlines()
+    with open('employees.txt', 'w') as file:
+        for line in lines:
+            if line.startswith(employee_id+','):
+                print("Current Record:", line.strip())
+                name = input("Enter new name: ")
+                position = input("Enter new position: ")
+                salary = input("Enter new salary: ")
+                file.write(f'{employee_id}, {name}, {position}, {salary}\n')
+                updated = True
+            else:
+                file.write(line)
+    if not updated:
+        print("Employee ID not found.\n")
+
+def delete_record():
+    employee_id = input("Enter Employee ID to delete: ")
+    deleted = False
+    with open('employees.txt', 'r') as file:
+        lines = file.readlines()
+    with open('employees.txt', 'w') as file:
+        for line in lines:
+            if not line.startswith(employee_id+','):
+                file.write(line)
+            else:
+                deleted = True
+    
+    if deleted:
+        print("Employee record deleted!\n")
+    else:
+        print("Employee ID not found.\n")
+
+        
+            
 
 
 while True:
     print('''1. Add new employee record
-    2. View all employee records
-    3. Search for an employee by Employee ID
-    4. Update an employee's information
-    5. Delete an employee record
-    6. Exit''')
-    option = int(input("Choose one option! Enter the number of option: "))
+2. View all employee records
+3. Search for an employee by Employee ID
+4. Update an employee's information
+5. Delete an employee record
+6. Exit''')
+    try:
+        option = int(input("Choose an option (1-6): "))
+    except ValueError:
+        print("Invalid input. Enter a number between 1 and 6.")
+        continue
     if option == 1:
         add_employee()
     elif option == 2:
