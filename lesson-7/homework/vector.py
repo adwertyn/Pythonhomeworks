@@ -40,5 +40,5 @@ print(dot_product)
 v5 = 3 * v1
 print(v5)
 print(v1.magnitude())
-v_unit = v1.normalize()
-print(v_unit)
+v_normalize = v1.normalize()
+print(v_normalize)

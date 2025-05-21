@@ -1,32 +1,31 @@
-def add_employee():  # Add a new employee
+def add_employee():  
     while True:
         employee_id = input("Enter Employee ID: ")
-        if employee_id.isdigit():  # ID must be numeric
+        if employee_id.isdigit():  
             break
         else:
             print("Please enter a valid numeric Employee ID.")
 
     while True:
         name = input("Enter Name: ")
-        if name.isdigit():  # Name must not be numeric
+        if name.isdigit(): 
             print("Enter a string, not a number!")
         else:
             break
 
     while True:
         position = input("Enter Position: ")
-        if position.isdigit():  # Position must not be numeric
+        if position.isdigit():
             print("Enter a string, not a number!")
         else:
             break
 
-    salary = input("Enter Salary: ")  # No validation for simplicity
-
+    salary = input("Enter Salary: ") 
     with open("employees.txt", "a") as file:
-        file.write(f"{employee_id}, {name}, {position}, {salary}\n")  # Save to file
+        file.write(f"{employee_id}, {name}, {position}, {salary}\n")  
     print("Employee added successfully!\n")
 
-def display_records():  # Show all records
+def display_records(): 
     with open("employees.txt", 'r') as file:
         records = file.readlines()
         if not records:
@@ -36,19 +35,19 @@ def display_records():  # Show all records
             for record in records:
                 print(record.strip())
 
-def search_info():  # Search by ID
+def search_info():  
     employee_id = input("Enter Employee ID to search: ")
     found = False
     with open("employees.txt", "r") as file:
         for line in file:
-            if line.startswith(employee_id + ","):  # Match ID
+            if line.startswith(employee_id + ","): 
                 print("Employee Found: ", line.strip())
                 found = True
                 break
     if not found:
         print("Employee not found.\n")
 
-def update_record():  # Update employee data
+def update_record():  
     employee_id = input("Enter Employee ID to update: ")
     updated = False
     with open('employees.txt', 'r') as file:
@@ -60,14 +59,14 @@ def update_record():  # Update employee data
                 name = input("Enter new name: ")
                 position = input("Enter new position: ")
                 salary = input("Enter new salary: ")
-                file.write(f'{employee_id}, {name}, {position}, {salary}\n')  # Write updated
+                file.write(f'{employee_id}, {name}, {position}, {salary}\n')  
                 updated = True
             else:
                 file.write(line)
     if not updated:
         print("Employee ID not found.\n")
 
-def delete_record():  # Delete employee by ID
+def delete_record(): 
     employee_id = input("Enter Employee ID to delete: ")
     deleted = False
     with open('employees.txt', 'r') as file:
@@ -109,4 +108,4 @@ while True:
     elif option == 5:
         delete_record()
     else:
-        exit()  # Exit program
+        exit() 
