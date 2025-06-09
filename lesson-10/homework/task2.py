@@ -1,16 +1,32 @@
 import random
+import requests
 
-movies_by_genre = {
-    "action": ["Mad Max: Fury Road", "John Wick", "Die Hard", "Gladiator"],
-    "comedy": ["The Hangover", "Superbad", "Step Brothers", "Groundhog Day"],
-    "drama": ["The Shawshank Redemption", "Forrest Gump", "Fight Club", "The Godfather"],
-    "sci-fi": ["Inception", "The Matrix", "Interstellar", "Blade Runner 2049"],
+main_url = "https://api.themoviedb.org/3"
+api_key = 'e3fdfbb5ce95f70b6e5f693e68ac518e'
+genre_map = {
+    'action': 28,
+'comedy': 35,
+'drama': 18,
+'history': 36,
+'horror': 27,
+'romance': 10749,
+'sci-fi': 878,
 }
-
-genre = input("Enter a movie genre (action, comedy, drama, sci-fi, romance, horror): ").strip().lower()
-
-if genre in movies_by_genre:
-    movie = random.choice(movies_by_genre[genre])
-    print(f"We recommend you watch: {movie}")
+movie_genre = input("Enter genre(action, comedy, drama, history, horror, romance, sci-fi): ").lower()
+if movie_genre in genre_map:
+    genre_id = genre_map[movie_genre]
+    url = f"{main_url}/discover/movie?api_key={api_key}&with_genres={genre_id}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        movies = response.json()['results']
+        if movies:
+            movie = random.choice(movies)
+            print(f"We recommend you watch: {movie['title']} (Rating: {movie['vote_average']})")
+        else:
+            print("No movies found for this genre.")
+    else:
+        print('Failed to get data')
+    
 else:
-    print("Sorry, we don't have recommendations for that genre.")
+    print("Sorry, that genre is not supported.")
+
