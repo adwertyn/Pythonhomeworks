@@ -19,11 +19,11 @@ for item in items:
     name = item.find_element(By.TAG_NAME, 'h4').text
     price = item.find_element(By.TAG_NAME, 'h5').text
     description = item.find_element(By.TAG_NAME, 'p').text
-all_laptops.append({
-            'name': name,
-            'price': price,
-            'description': description
-        })
+    all_laptops.append({
+                'name': name,
+                'price': price,
+                'description': description
+            })
 with open('laptops.json', 'w', encoding='utf-8') as file:
     json.dump(all_laptops, file, indent=4)
 time.sleep(5)
